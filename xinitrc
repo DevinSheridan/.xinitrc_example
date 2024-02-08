@@ -18,3 +18,5 @@ exec xbindkeys &
 
 # Start window manager (dwm)
 exec dwm
+
+#end
