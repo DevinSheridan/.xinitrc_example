@@ -1,22 +1,8 @@
 #!/bin/sh
 
-#picom &
-
+#closes any cached instance of wal to prevent picom errors
 wal -c &
 /home/light/wal/wal -c &
-#pipx run pywal -i Misa.png &
-
-#/home/light/wal/wal -i /home/light/Pictures/Misa.png &
-
-#feh --no-fehbg --bg-fill #placesinglequoteherez/home/light/Pictures/Misa.png'
-
-#/home/light/slstatus/slstatus &
-
-#exec dwm
-
-#pipx run pywal -i Misa.png
-
-###################################
 
 # Start compositor (picom)
 picom &
