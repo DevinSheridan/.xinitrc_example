@@ -1,22 +1,35 @@
 #!/bin/sh
 
-#closes any cached instance of wal to prevent picom errors
-wal -c &
-/home/light/wal/wal -c &
+#Open RC Only      
 
-# Start compositor (picom)
+if test -z "$XDG_RUNTIME_DIR"; then
+    exUport XDG_RUNTIME_DIR=$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)
+fi
+
+eval "$(dbus-launch --sh-syntax --exit-with-session)"
+
+#####Put Fun Things Below Here####
+
+#clearing wal command before compositor and then setting wal after stops problems
+wal -c &
+/home/guts/.venv/bin/wal -c &
+
+#start compositor
 picom &
 
-# Set wallpaper with wal
-exec /home/light/wal/wal -i /home/light/Pictures/Misa.png &
+#set wallpaper with wal
+  /home/guts/.venv/bin/wal -i /home/guts/Pictures/BerserkHorseMountain.jpg
 
-# Start status bar (slstatus)
-/home/light/slstatus/slstatus &
+#Start xbindkeys - I do this twice... probably don't need to.
+ xbindkeys &
 
-#hotkey
-exec xbindkeys &
+#start slstatus
+ /home/guts/.slstatus/slstatus-1.0/slstatus &
 
-# Start window manager (dwm)
+
+# Start xbindkeys using the script
+/home/guts/.scripts/start_xbindkeys.sh &
+
+#start window manager (dwm)
 exec dwm
 
-#end
